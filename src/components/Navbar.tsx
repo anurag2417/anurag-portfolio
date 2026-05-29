@@ -9,7 +9,7 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <h1 className="text-xl font-semibold">
-          Anurag
+          Portfolio
         </h1>
 
         <ul className="hidden md:flex items-center gap-10 text-sm text-gray-300">
@@ -42,9 +42,9 @@ export default function Navbar() {
           className="md:hidden flex flex-col gap-1"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="w-6 h-[2px] bg-white" />
-          <span className="w-6 h-[2px] bg-white" />
-          <span className="w-6 h-[2px] bg-white" />
+          <span className="w-6 h-0.5 bg-white" />
+          <span className="w-6 h-0.5 bg-white" />
+          <span className="w-6 h-0.5 bg-white" />
         </button>
       </div>
 
