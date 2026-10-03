@@ -76,7 +76,7 @@ export default async function ProjectPage({
 
       <section className="border-b border-border px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto w-full max-w-[1440px]">
-          <ProjectMedia projectName={project.name} />
+          <ProjectMedia />
         </div>
       </section>
 
