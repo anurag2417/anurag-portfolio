@@ -1,77 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+import SmoothScroll from "@/components/layout/SmoothScroll";
 import "./globals.css";
 
-const inter = Inter({
+const instrumentSans = Instrument_Sans({
+  variable: "--font-display",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Anurag Kumar | Full Stack Developer",
-
+  title: "Anurag | Product Builder",
   description:
-    "Full Stack Developer specializing in React, Next.js, Java, Node.js, MongoDB, and modern web technologies. Creator of FinanceFlow and AlgoStreak.",
-
-  keywords: [
-    "Anurag Kumar",
-    "Full Stack Developer",
-    "React Developer",
-    "Next.js Developer",
-    "Java Developer",
-    "Frontend Developer",
-    "Web Developer",
-    "Software Engineer",
-    "FinanceFlow",
-    "AlgoStreak",
-  ],
-
-  authors: [
-    {
-      name: "Anurag Kumar",
-    },
-  ],
-
-  creator: "Anurag Kumar",
-
-  openGraph: {
-    title: "Anurag Kumar | Full Stack Developer",
-
-    description:
-      "Full Stack Developer specializing in React, Next.js, Java, Node.js, MongoDB, and modern web technologies.",
-
-    url: "https://YOUR-DOMAIN.com",
-
-    siteName: "Anurag Kumar Portfolio",
-
-    images: [
-      {
-        url: "/images/profile.JPG",
-        width: 1200,
-        height: 630,
-        alt: "Anurag Kumar Portfolio",
-      },
-    ],
-
-    locale: "en_US",
-
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-
-    title: "Anurag Kumar | Full Stack Developer",
-
-    description:
-      "Full Stack Developer specializing in React, Next.js, Java, Node.js, MongoDB, and modern web technologies.",
-
-    images: ["/images/profile.JPG"],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
+    "Anurag builds digital products with a developer's precision and a director's eye.",
 };
 
 export default function RootLayout({
@@ -81,7 +29,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${instrumentSans.variable} ${ibmPlexMono.variable}`}>
+        <SmoothScroll />
         {children}
       </body>
     </html>

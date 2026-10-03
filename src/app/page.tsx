@@ -1,21 +1,27 @@
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import About from "../components/About";
-import FeaturedProjects from "../components/FeaturedProjects";
-import Skills from "../components/Skills";
-import Contact from "../components/Contact";
-import Footer from "../components/Footer";
+import CustomCursor from "@/components/ui/CustomCursor";
+import Navbar from "@/components/layout/Navbar";
+import Preloader from "@/components/layout/Preloader";
+import Hero from "@/components/sections/Hero";
 
 export default function Home() {
   return (
     <>
+      <Preloader />
+      <CustomCursor />
       <Navbar />
-      <Hero />
-      <About />
-      <FeaturedProjects />
-      <Skills />
-      <Contact />
-      <Footer />
+
+      <main>
+        <Hero />
+
+        <section
+          id="work"
+          className="flex min-h-screen items-center justify-center border-t border-border px-5 md:px-10"
+        >
+          <p className="font-mono text-xs uppercase tracking-[0.16em] text-text-muted">
+            Selected work coming next.
+          </p>
+        </section>
+      </main>
     </>
   );
 }
