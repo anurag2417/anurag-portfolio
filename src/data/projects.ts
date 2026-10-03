@@ -17,7 +17,7 @@ export const projects: Project[] = [
     name: "RepoGuide",
     tagline: "AI Contribution Copilot",
     description:
-      "A developer tool designed to make open-source contribution discovery more focused.",
+      "A developer tool that helps people discover relevant open-source issues and turn contribution ideas into an actionable starting point.",
     year: "2026",
     category: "Developer Tool",
     stack: [
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     name: "KodxCamp",
     tagline: "Learn by Building",
     description:
-      "A browser-first programming platform built around courses, practice, projects, and feedback.",
+      "A browser-first programming platform combining interactive lessons, coding practice, projects, progress tracking, and live learning.",
     year: "2026",
     category: "EdTech Platform",
     stack: [

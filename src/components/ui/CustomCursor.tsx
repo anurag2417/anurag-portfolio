@@ -5,11 +5,13 @@ import { gsap } from "@/lib/gsap";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const cursor = cursorRef.current;
+    const label = labelRef.current;
 
-    if (!cursor) {
+    if (!cursor || !label) {
       return;
     }
 
@@ -29,37 +31,80 @@ export default function CustomCursor() {
       });
     };
 
-    const handleEnter = () => {
-      gsap.to(cursor, {
-        scale: 1,
-        opacity: 1,
-        duration: 0.2,
-      });
+    const handlePointerOver = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const interactive = target.closest<HTMLElement>("[data-cursor]");
+
+      if (!interactive) {
+        return;
+      }
+
+      const cursorType = interactive.dataset.cursor;
+
+      if (cursorType === "view") {
+        gsap.to(cursor, {
+          width: 72,
+          height: 72,
+          duration: 0.35,
+          ease: "power3.out",
+        });
+
+        gsap.to(label, {
+          opacity: 1,
+          duration: 0.2,
+        });
+
+        label.textContent = "View";
+      }
     };
 
-    const handleLeave = () => {
+    const handlePointerOut = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const interactive = target.closest<HTMLElement>("[data-cursor]");
+
+      if (!interactive) {
+        return;
+      }
+
+      const relatedTarget = event.relatedTarget as Node | null;
+
+      if (relatedTarget && interactive.contains(relatedTarget)) {
+        return;
+      }
+
       gsap.to(cursor, {
-        scale: 0,
+        width: 10,
+        height: 10,
+        duration: 0.35,
+        ease: "power3.out",
+      });
+
+      gsap.to(label, {
         opacity: 0,
-        duration: 0.2,
+        duration: 0.15,
       });
     };
 
     window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseenter", handleEnter);
-    window.addEventListener("mouseleave", handleLeave);
+    document.addEventListener("mouseover", handlePointerOver);
+    document.addEventListener("mouseout", handlePointerOut);
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseenter", handleEnter);
-      window.removeEventListener("mouseleave", handleLeave);
+      document.removeEventListener("mouseover", handlePointerOver);
+      document.removeEventListener("mouseout", handlePointerOut);
     };
   }, []);
 
   return (
     <div
       ref={cursorRef}
-      className="pointer-events-none fixed left-0 top-0 z-[100] hidden h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-text-primary md:block"
-    />
+      className="pointer-events-none fixed left-0 top-0 z-[200] hidden h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-text-primary md:flex"
+    >
+      <span
+        ref={labelRef}
+        className="font-mono text-[9px] uppercase tracking-[0.08em] text-background opacity-0"
+      />
+    </div>
   );
 }

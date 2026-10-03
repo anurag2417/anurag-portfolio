@@ -1,7 +1,13 @@
-import CustomCursor from "@/components/ui/CustomCursor";
+import About from "@/components/sections/About";
+import Capabilities from "@/components/sections/Capabilities";
+import Contact from "@/components/sections/Contact";
+import Intro from "@/components/sections/Intro";
+import Hero from "@/components/sections/Hero";
+import SelectedWork from "@/components/sections/SelectedWork";
+import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import Preloader from "@/components/layout/Preloader";
-import Hero from "@/components/sections/Hero";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 export default function Home() {
   return (
@@ -12,16 +18,14 @@ export default function Home() {
 
       <main>
         <Hero />
-
-        <section
-          id="work"
-          className="flex min-h-screen items-center justify-center border-t border-border px-5 md:px-10"
-        >
-          <p className="font-mono text-xs uppercase tracking-[0.16em] text-text-muted">
-            Selected work coming next.
-          </p>
-        </section>
+        <Intro />
+        <SelectedWork />
+        <Capabilities />
+        <About />
+        <Contact />
       </main>
+
+      <Footer />
     </>
   );
 }
