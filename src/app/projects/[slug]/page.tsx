@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CaseStudyHero from "@/components/case-study/CaseStudyHero";
@@ -76,7 +77,15 @@ export default async function ProjectPage({
 
       <section className="border-b border-border px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto w-full max-w-[1440px]">
-          <ProjectMedia />
+          {project.media.map((media, index) => (
+            <ProjectMedia
+              key={media.src}
+              src={media.src}
+              alt={media.alt}
+              caption={media.caption}
+              priority={index === 0}
+            />
+          ))}
         </div>
       </section>
 
@@ -100,7 +109,7 @@ export default async function ProjectPage({
               className="bg-background p-6 md:p-8"
             >
               <span className="font-mono text-[9px] text-accent">
-                0{index + 1}
+                {String(index + 1).padStart(2, "0")}
               </span>
 
               <h3 className="mt-6 text-2xl font-medium tracking-[-0.04em]">

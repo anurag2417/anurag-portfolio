@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 
 type ProjectMediaProps = {
@@ -8,35 +9,22 @@ type ProjectMediaProps = {
 };
 
 export default function ProjectMedia({
-  src,
-  alt = "",
+  src = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=85",
+  alt = "Developer workspace",
   caption,
   priority = false,
 }: ProjectMediaProps) {
   return (
     <figure className="mt-16">
       <div className="relative aspect-[16/10] overflow-hidden border border-border bg-surface">
-        {src ? (
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            priority={priority}
-            sizes="(max-width: 768px) 100vw, 1200px"
-            className="object-cover"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-text-muted">
-                Project media
-              </p>
-              <p className="mt-3 text-sm text-text-muted">
-                Visual coming soon
-              </p>
-            </div>
-          </div>
-        )}
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          sizes="(max-width: 768px) 100vw, 1200px"
+          className="object-cover"
+        />
       </div>
 
       {caption && (

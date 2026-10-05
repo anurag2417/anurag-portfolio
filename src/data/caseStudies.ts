@@ -1,3 +1,4 @@
+
 export type CaseStudy = {
   slug: string;
   number: string;
@@ -21,6 +22,11 @@ export type CaseStudy = {
   technicalDetails: {
     title: string;
     description: string;
+  }[];
+  media: {
+    src: string;
+    alt: string;
+    caption: string;
   }[];
   nextProject: string;
 };
@@ -98,6 +104,28 @@ export const caseStudies: CaseStudy[] = [
           "The application separates the frontend, backend, persistence, external APIs, and AI services so each part can evolve independently.",
       },
     ],
+    media: [
+      {
+        src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=85",
+        alt: "Developer workspace with laptop and code",
+        caption: "RepoGuide / Developer workflow",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1800&q=85",
+        alt: "Programming code displayed on a screen",
+        caption: "Repository discovery",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=85",
+        alt: "Computer hardware and electronic components",
+        caption: "Technical architecture",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1800&q=85",
+        alt: "Team collaborating around computers",
+        caption: "Building for open-source contributors",
+      },
+    ],
     nextProject: "kodxcamp",
   },
   {
@@ -159,6 +187,28 @@ export const caseStudies: CaseStudy[] = [
         title: "Editor experience",
         description:
           "Monaco provides a familiar development environment without forcing students to leave the learning platform.",
+      },
+    ],
+    media: [
+      {
+        src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+        alt: "Laptop used for online learning",
+        caption: "KodxCamp / Learning experience",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1800&q=85",
+        alt: "Digital learning and computer workspace",
+        caption: "Student dashboard",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1800&q=85",
+        alt: "Code displayed on a developer's screen",
+        caption: "Browser-based coding",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1800&q=85",
+        alt: "Students collaborating on a project",
+        caption: "Learning by building",
       },
     ],
     nextProject: "repoguide",

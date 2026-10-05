@@ -1,3 +1,4 @@
+
 export type Project = {
   id: string;
   number: string;
@@ -8,6 +9,7 @@ export type Project = {
   category: string;
   stack: string[];
   slug: string;
+  heroImage: string;
 };
 
 export const projects: Project[] = [
@@ -29,6 +31,8 @@ export const projects: Project[] = [
       "GitHub API",
     ],
     slug: "repoguide",
+    heroImage:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=85",
   },
   {
     id: "kodxcamp",
@@ -49,5 +53,7 @@ export const projects: Project[] = [
       "Express",
     ],
     slug: "kodxcamp",
+    heroImage:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
   },
 ];

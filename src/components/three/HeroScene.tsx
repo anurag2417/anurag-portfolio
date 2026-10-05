@@ -126,20 +126,14 @@ function ProductCore() {
 
 export default function HeroScene() {
   return (
+
     <Canvas
-      camera={{
-        position: [0, 0, 7.5],
-        fov: 42,
-      }}
-      dpr={[1, 1.5]}
-      gl={{
-        antialias: true,
-        alpha: true,
-      }}
-      performance={{
-        min: 0.5,
-      }}
+      camera={{ position: [0, 0, 7.5], fov: 42 }}
+      dpr={1}
+      gl={{ antialias: false, alpha: true, powerPreference: "low-power" }}
+      performance={{ min: 0.5 }}
     >
+
       <ambientLight intensity={0.45} />
 
       <ProductCore />

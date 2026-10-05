@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
 import SmoothScroll from "@/components/layout/SmoothScroll";
+import PageTransition from "@/components/layout/PageTransition";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${instrumentSans.variable} ${ibmPlexMono.variable}`}>
         <SmoothScroll />
+        <PageTransition />
         {children}
       </body>
     </html>
