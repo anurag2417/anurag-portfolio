@@ -1,151 +1,209 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useRef } from "react";
 import * as THREE from "three";
 
-function ProductCore() {
-  const groupRef = useRef<THREE.Group>(null);
-  const coreRef = useRef<THREE.Mesh>(null);
-  const accentRef = useRef<THREE.Mesh>(null);
+function Orbit({
+  radius,
+  tube,
+  color,
+  rotation,
+  opacity,
+}: {
+  radius: number;
+  tube: number;
+  color: string;
+  rotation: [number, number, number];
+  opacity: number;
+}) {
+  return (
+    <mesh rotation={rotation}>
+      <torusGeometry args={[radius, tube, 12, 180]} />
+      <meshStandardMaterial
+        color={color}
+        metalness={0.85}
+        roughness={0.3}
+        transparent
+        opacity={opacity}
+      />
+    </mesh>
+  );
+}
 
-  useFrame((state, delta) => {
-    if (!groupRef.current || !coreRef.current || !accentRef.current) {
-      return;
-    }
+function EnergySatellite({
+  position,
+  size = 0.075,
+}: {
+  position: [number, number, number];
+  size?: number;
+}) {
+  const ref = useRef<THREE.Mesh>(null);
 
-    const targetX = state.pointer.y * 0.18;
-    const targetY = state.pointer.x * 0.25;
-
-    groupRef.current.rotation.x = THREE.MathUtils.damp(
-      groupRef.current.rotation.x,
-      targetX,
-      3,
-      delta,
-    );
-
-    groupRef.current.rotation.y = THREE.MathUtils.damp(
-      groupRef.current.rotation.y,
-      targetY,
-      3,
-      delta,
-    );
-
-    groupRef.current.rotation.z += delta * 0.08;
-
-    coreRef.current.rotation.x += delta * 0.12;
-    coreRef.current.rotation.y += delta * 0.18;
+  useFrame((state) => {
+    if (!ref.current) return;
 
     const time = state.clock.elapsedTime;
-
-    accentRef.current.position.y = Math.sin(time * 1.5) * 0.08;
+    ref.current.scale.setScalar(1 + Math.sin(time * 1.8) * 0.07);
   });
 
   return (
-    <group ref={groupRef}>
-      <mesh ref={coreRef}>
-        <icosahedronGeometry args={[1.45, 4]} />
+    <mesh ref={ref} position={position}>
+      <sphereGeometry args={[size, 32, 32]} />
+      <meshBasicMaterial
+        color="#FF793D"
+        toneMapped={false}
+      />
+    </mesh>
+  );
+}
+
+function Core() {
+  const rootRef = useRef<THREE.Group>(null);
+  const sphereRef = useRef<THREE.Mesh>(null);
+  const orbitGroupRef = useRef<THREE.Group>(null);
+  const lightRef = useRef<THREE.PointLight>(null);
+
+  useFrame((state, delta) => {
+    if (
+      !rootRef.current ||
+      !sphereRef.current ||
+      !orbitGroupRef.current ||
+      !lightRef.current
+    ) {
+      return;
+    }
+
+    const time = state.clock.elapsedTime;
+
+    rootRef.current.rotation.x = THREE.MathUtils.damp(
+      rootRef.current.rotation.x,
+      state.pointer.y * 0.08,
+      2,
+      delta,
+    );
+
+    rootRef.current.rotation.y = THREE.MathUtils.damp(
+      rootRef.current.rotation.y,
+      state.pointer.x * 0.1,
+      2,
+      delta,
+    );
+
+    rootRef.current.position.y = Math.sin(time * 0.5) * 0.035;
+
+    sphereRef.current.rotation.y += delta * 0.035;
+
+    orbitGroupRef.current.rotation.y += delta * 0.06;
+
+    lightRef.current.intensity = 1.8 + Math.sin(time * 1.3) * 0.25;
+  });
+
+  return (
+    <group ref={rootRef}>
+      <mesh ref={sphereRef}>
+        <sphereGeometry args={[1.12, 96, 96]} />
         <meshStandardMaterial
-          color="#171614"
-          metalness={0.9}
-          roughness={0.2}
+          color="#080605"
+          metalness={0.28}
+          roughness={0.24}
         />
       </mesh>
 
-      <mesh scale={0.72}>
-        <icosahedronGeometry args={[1.45, 3]} />
-        <meshStandardMaterial
-          color="#2B2926"
-          metalness={0.75}
-          roughness={0.3}
-          wireframe
+      <mesh scale={1.004}>
+        <sphereGeometry args={[1.12, 96, 96]} />
+        <meshBasicMaterial
+          color="#110907"
+          side={THREE.BackSide}
           transparent
-          opacity={0.45}
+          opacity={0.3}
         />
       </mesh>
 
-      <mesh rotation={[Math.PI / 2.4, 0.2, 0.15]}>
-        <torusGeometry args={[2.05, 0.018, 16, 160]} />
-        <meshStandardMaterial
-          color="#EDE8DF"
-          metalness={0.8}
-          roughness={0.25}
-          transparent
-          opacity={0.65}
+      <pointLight
+        ref={lightRef}
+        position={[0.25, 0.3, 1.5]}
+        color="#FF6A32"
+        intensity={1.8}
+        distance={3.5}
+        decay={2}
+      />
+
+      <pointLight
+        position={[0.1, 0.45, 1.7]}
+        color="#E9D8C5"
+        intensity={0.65}
+        distance={2.8}
+        decay={2}
+      />
+
+      <group ref={orbitGroupRef}>
+        <Orbit
+          radius={1.48}
+          tube={0.009}
+          color="#65564B"
+          rotation={[0.9, 0.2, -0.35]}
+          opacity={0.58}
+        />
+
+        <Orbit
+          radius={1.62}
+          tube={0.012}
+          color="#9A4B31"
+          rotation={[0.45, 0.85, 0.65]}
+          opacity={0.72}
+        />
+
+        <Orbit
+          radius={1.78}
+          tube={0.008}
+          color="#766B60"
+          rotation={[1.25, 0.15, 0.2]}
+          opacity={0.42}
+        />
+
+        <EnergySatellite position={[1.18, 0.98, 0.1]} size={0.075} />
+      </group>
+
+      <mesh position={[0.1, 0.34, 1.08]}>
+        <sphereGeometry args={[0.025, 20, 20]} />
+        <meshBasicMaterial
+          color="#F5E7D7"
+          toneMapped={false}
         />
       </mesh>
 
-      <mesh rotation={[0.4, Math.PI / 3, 0.8]}>
-        <torusGeometry args={[2.35, 0.012, 16, 160]} />
-        <meshStandardMaterial
-          color="#8C877D"
-          metalness={0.7}
-          roughness={0.3}
-          transparent
-          opacity={0.5}
-        />
-      </mesh>
-
-      <mesh rotation={[1.1, 0.4, Math.PI / 4]}>
-        <torusGeometry args={[1.8, 0.01, 16, 160]} />
-        <meshStandardMaterial
-          color="#EDE8DF"
-          metalness={0.8}
-          roughness={0.2}
-          transparent
-          opacity={0.35}
-        />
-      </mesh>
-
-      <mesh ref={accentRef} position={[1.72, 0, 0]}>
-        <sphereGeometry args={[0.09, 24, 24]} />
-        <meshStandardMaterial
+      <mesh position={[-0.3, -0.48, 1.02]}>
+        <sphereGeometry args={[0.035, 20, 20]} />
+        <meshBasicMaterial
           color="#FF4D1C"
-          emissive="#FF4D1C"
-          emissiveIntensity={5}
+          toneMapped={false}
         />
       </mesh>
-
-      <pointLight
-        position={[2, 2, 3]}
-        intensity={8}
-        distance={8}
-        color="#EDE8DF"
-      />
-
-      <pointLight
-        position={[-3, -1, 2]}
-        intensity={4}
-        distance={7}
-        color="#FF4D1C"
-      />
     </group>
   );
 }
 
 export default function HeroScene() {
   return (
-
     <Canvas
-      camera={{ position: [0, 0, 7.5], fov: 42 }}
-      dpr={1}
-      gl={{ antialias: false, alpha: true, powerPreference: "low-power" }}
-      performance={{ min: 0.5 }}
+      camera={{ position: [0, 0, 6.5], fov: 40 }}
+      dpr={[1, 1.5]}
+      gl={{
+        antialias: true,
+        alpha: true,
+        powerPreference: "low-power",
+      }}
     >
+      <ambientLight intensity={0.35} />
 
-      <ambientLight intensity={0.45} />
+      <directionalLight
+        position={[-3, 3, 4]}
+        intensity={0.45}
+        color="#E9D8C5"
+      />
 
-      <ProductCore />
-
-      <EffectComposer>
-        <Bloom
-          intensity={0.7}
-          luminanceThreshold={1}
-          luminanceSmoothing={0.7}
-          mipmapBlur
-        />
-      </EffectComposer>
+      <Core />
     </Canvas>
   );
 }

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -184,7 +185,7 @@ export default function Navbar() {
         >
           <Link
             href="/"
-            className="relative z-[110] font-mono text-[11px] uppercase tracking-[0.12em] text-text-primary"
+            className="relative z-[110] font-mono text-sm uppercase tracking-[0.12em] text-text-primary md:text-base"
           >
             Anurag
           </Link>
@@ -194,7 +195,7 @@ export default function Navbar() {
               <a
                 key={item.label}
                 href={item.href}
-                className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted transition-colors duration-300 hover:text-text-primary"
+                className="font-mono text-sm uppercase tracking-[0.1em] text-text-muted transition-colors duration-300 hover:text-text-primary lg:text-base"
               >
                 {item.label}
               </a>
@@ -202,9 +203,9 @@ export default function Navbar() {
           </div>
 
           <div className="hidden items-center gap-2 md:flex">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
 
-            <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-text-muted">
+            <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-text-muted lg:text-xs">
               Available for select projects
             </span>
           </div>
@@ -214,7 +215,7 @@ export default function Navbar() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             onClick={handleMenuToggle}
-            className="relative z-[110] flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted transition-colors duration-300 hover:text-text-primary md:hidden"
+            className="relative z-[110] flex items-center gap-3 font-mono text-xs uppercase tracking-[0.12em] text-text-muted transition-colors duration-300 hover:text-text-primary md:hidden"
           >
             <span>{menuOpen ? "Close" : "Menu"}</span>
 
@@ -241,7 +242,7 @@ export default function Navbar() {
           className="fixed inset-0 z-[90] flex flex-col bg-surface px-5 pb-8 pt-32 md:hidden"
         >
           <div className="flex flex-1 flex-col">
-            <span className="mb-8 font-mono text-[10px] uppercase tracking-[0.14em] text-text-muted">
+            <span className="mb-8 font-mono text-xs uppercase tracking-[0.14em] text-text-muted">
               Navigation
             </span>
 
@@ -255,16 +256,16 @@ export default function Navbar() {
                   className="group flex items-baseline justify-between border-b border-border py-5 text-left"
                 >
                   <span className="flex items-baseline gap-4">
-                    <span className="font-mono text-[9px] text-text-muted">
+                    <span className="font-mono text-[11px] text-text-muted">
                       0{index + 1}
                     </span>
 
-                    <span className="text-5xl font-medium uppercase tracking-[-0.06em] text-text-primary">
+                    <span className="text-5xl font-medium uppercase tracking-[-0.06em] text-text-primary sm:text-6xl">
                       {item.label}
                     </span>
                   </span>
 
-                  <span className="text-xl text-text-muted transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent">
+                  <span className="text-2xl text-text-muted transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent">
                     ↗
                   </span>
                 </button>
@@ -277,11 +278,11 @@ export default function Navbar() {
             className="flex items-end justify-between border-t border-border pt-5"
           >
             <div>
-              <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-text-muted">
+              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-text-muted">
                 Bengaluru, India
               </p>
 
-              <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.12em] text-text-muted">
+              <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-text-muted">
                 Available for select projects
               </p>
             </div>
