@@ -99,6 +99,7 @@ export default function CustomCursor() {
   return (
     <div
       ref={cursorRef}
+      aria-hidden="true"
       className="pointer-events-none fixed left-0 top-0 z-[200] hidden h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-text-primary md:flex"
     >
       <span
