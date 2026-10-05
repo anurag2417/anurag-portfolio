@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const facts = [
   {
     label: "Based",
@@ -64,34 +66,31 @@ export default function About() {
               </div>
 
               <div className="md:col-span-4">
-                <div className="aspect-[4/5] overflow-hidden border border-border bg-surface">
-                  <div className="flex h-full flex-col justify-between p-6 md:p-8">
+                <div className="relative aspect-[4/5] overflow-hidden border border-border bg-surface">
+                  <Image
+                    src="https://ik.imagekit.io/djimomx5ff/IMG_7558.JPG"
+                    alt="Portrait of Anurag"
+                    fill
+                    priority={false}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1440px) 33vw, 400px"
+                    className="object-cover transition-transform duration-700 hover:scale-[1.03]"
+                  />
+
+                  <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-6 md:p-8">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-text-muted">
+                      <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/70">
                         Portrait
                       </span>
 
                       <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                     </div>
 
-                    <div>
-                      <p className="text-[clamp(3rem,5vw,5rem)] font-medium uppercase leading-[0.8] tracking-[-0.07em]">
-                        AN
-                      </p>
-
-                      <p className="mt-5 max-w-[180px] font-mono text-[9px] uppercase leading-relaxed tracking-[0.1em] text-text-muted">
-                        Visual placeholder
-                        <br />
-                        Replace with portrait
-                      </p>
-                    </div>
-
-                    <div className="flex justify-between border-t border-border pt-4">
-                      <span className="font-mono text-[9px] text-text-muted">
+                    <div className="flex justify-between border-t border-white/20 pt-4">
+                      <span className="font-mono text-[9px] text-white/70">
                         01
                       </span>
 
-                      <span className="font-mono text-[9px] text-text-muted">
+                      <span className="font-mono text-[9px] text-white/70">
                         2026
                       </span>
                     </div>
