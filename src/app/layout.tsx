@@ -17,7 +17,7 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://your-domain.com";
+const siteUrl = "https://anurag-kumar.vercel.app/";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
